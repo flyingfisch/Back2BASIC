@@ -1,0 +1,21 @@
+1. What it is
+Back2BASIC is a library that allows you to have all the functions you loved in BASIC. This will help BASIC programmers switch to lua, as well as making it more straightforward to port BASIC programs to lua.
+
+2. Already implemented
+- b2b.menu (a prefabricated menu function)
+- b2b.printText (like "HELLO" in BASIC, but with LESS-style page breaks)
+- b2b.locate (like locate in BASIC)
+- b2b.ygraph
+
+3. To be implemented
+
+4. Usage
+Make a folder called "lib" in your root directory. Put b2b.lua in this folder.
+In the program you wish to use the library, put run([[lib\b2b.lua]]) at the top.
+
+6. Function syntax
+NOTE: all width, height, x, and y values are not pixels, but characters.
+b2b.menu(x, y, width, height, title, array, color1 (optional), color2 (optional))
+b2b.printText(string, colorfg (optional), colorbg (optional))
+b2b.locate(x, y, string, colorfg (optional), colorbg (optional))
+b2b.ygraph(function (x) return <equation> end, vwin (optional), type (optional), colorfg (optional), colorbg (optional))
