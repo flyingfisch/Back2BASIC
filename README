@@ -15,7 +15,29 @@ In the program you wish to use the library, put run([[lib\b2b.lua]]) at the top.
 
 5. Function syntax
 NOTE: all width, height, x, and y values are not pixels, but characters.
-b2b.menu(x, y, width, height, title, array, color1 (optional), color2 (optional))
+b2b.menu(x, y, width, height, title, array, colorfg (optional), colorbg (optional))
+a menu function. returns number of selected item.
+- x: integer
+- y: integer
+- width: integer
+- height: integer. if smaller than number of items, menu will automatically scroll.
+- title: string. title to be displayed above menu.
+- array: array. menu options. ex. {"entry1", "entry2"}
+- colorfg, colorbg: color. defaults to b&w
+
 b2b.printText(string, colorfg (optional), colorbg (optional))
+displays text with LESS-style page breaks
+- string: string to be printed
+- colorfg, colorbg: color. defaults to b&w
+
 b2b.locate(x, y, string, colorfg (optional), colorbg (optional))
-b2b.ygraph(function (x) return <equation> end, vwin (optional), type (optional), colorfg (optional), colorbg (optional))
+like the Locate command in BASIC.
+- x: integer
+- y: integer
+- string: string to be displayed
+- colorfg, colorbg: color. defaults to b&w
+
+b2b.ygraph(f, vwin (optional), type (optional), colorfg (optional), colorbg (optional))
+- f: function of x to display. ex. function (x) return math.sin(x) end
+- vwin: array. ex. {xmin=-6, xmax=6, ymin=-3, ymax=3, step=.1}
+- colorfg, colorbg: color. defaults to b&w
