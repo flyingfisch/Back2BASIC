@@ -15,6 +15,7 @@ In the program you wish to use the library, put run([[lib\b2b.lua]]) at the top.
 
 5. Function syntax
 NOTE: all width, height, x, and y values are not pixels, but characters.
+
 b2b.menu(x, y, width, height, title, array, colorfg (optional), colorbg (optional))
 a menu function. returns number of selected item.
 - x: integer
