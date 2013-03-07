@@ -13,7 +13,7 @@ Back2BASIC is a library that allows you to have all the functions you loved in B
 Make a folder called "lib" in your root directory. Put b2b.lua in this folder.
 In the program you wish to use the library, put run([[lib\b2b.lua]]) at the top.
 
-6. Function syntax
+5. Function syntax
 NOTE: all width, height, x, and y values are not pixels, but characters.
 b2b.menu(x, y, width, height, title, array, color1 (optional), color2 (optional))
 b2b.printText(string, colorfg (optional), colorbg (optional))
