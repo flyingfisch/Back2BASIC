@@ -5,7 +5,8 @@ Back2BASIC is a library that allows you to have all the functions you loved in B
 - b2b.menu (a prefabricated menu function)
 - b2b.printText (like "HELLO" in BASIC, but with LESS-style page breaks)
 - b2b.locate (like locate in BASIC)
-- b2b.ygraph
+- b2b.ygraph (Y= graph)
+- b2b.inputString (get user input)
 
 3. To be implemented
 
@@ -39,6 +40,12 @@ like the Locate command in BASIC.
 - colorfg, colorbg: color. defaults to b&w
 
 b2b.ygraph(f, vwin (optional), type (optional), colorfg (optional), colorbg (optional))
+Graphs a Y= graph.
 - f: function of x to display. ex. function (x) return math.sin(x) end
 - vwin: array. ex. {xmin=-6, xmax=6, ymin=-3, ymax=3, step=.1}
+- colorfg, colorbg: color. defaults to b&w
+
+b2b.inputString(prompt, colorfg (optional), colorbg (optional))
+Gets user input.
+- prompt: string. Is displayed above the input block.
 - colorfg, colorbg: color. defaults to b&w

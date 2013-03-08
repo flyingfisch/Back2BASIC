@@ -8,6 +8,7 @@ b2b.menu = function (x, y, width, height, title, array, color1, color2)
 	color2 = color2 or zmg.makeColor("white")
 	local continue=0
 	local selected=1
+	if height>#array then height=#array end
 	local max=height
 	local j=1
 	x=x*12-12
@@ -99,10 +100,11 @@ b2b.locate = function (x, y, string, colorfg, colorbg)
 	colorfg = colorfg or zmg.makeColor("black")
 	colorbg = colorbg or zmg.makeColor("white")
 	zmg.drawText(x, y, string, colorfg, colorbg)
+	zmg.fastCopy()
 end
 
-b2b.ygraph = function(f, vwin, type, colorfg, colorbg)
-	vwin = vwin or {xmin=-3,xmax=3,ymin=-6,ymax=6,step=0.1}
+b2b.ygraph = function (f, vwin, type, colorfg, colorbg)
+	vwin = vwin or {xmin=-6,xmax=6,ymin=-3,ymax=3,step=0.1}
 	type = type or "connect"
 	colorfg = colorbg or zmg.makeColor("black")
 	colorbg = colorbg or zmg.makeColor("white")
@@ -128,5 +130,58 @@ b2b.ygraph = function(f, vwin, type, colorfg, colorbg)
 	end
     
 	zmg.fastCopy()
-	zmg.keyMenu()
+end
+
+b2b.inputString = function (prompt, colorfg, colorbg)
+	colorfg = colorfg or zmg.makeColor("black")
+	colorbg = colorbg or zmg.makeColor("white")
+	local blink=1
+	local blinktimer=1
+	local cursor=1
+	local cursorstyle={norm=" ",alpha="A",shift="s"}
+	local char=""
+	local string=""
+	local keyset="norm"
+	local key={norm={},alpha={},shift={}}
+	key.norm[41]="-" key.norm[51]="EXP" key.norm[61]="." key.norm[71]="0" key.norm[32]="-" key.norm[42]="+" key.norm[52]="3" key.norm[62]="2" key.norm[72]="1" key.norm[33]="/" key.norm[43]="*" key.norm[53]="6" key.norm[63]="5" key.norm[73]="4" key.norm[54]="9" key.norm[64]="8" key.norm[74]="7" key.norm[25]="->" key.norm[35]="," key.norm[45]=")" key.norm[55]="(" key.norm[26]="tan(" key.norm[36]="cos(" key.norm[46]="sin(" key.norm[56]="ln(" key.norm[66]="log(" key.norm[57]="^" key.norm[67]="^2"
+	key.alpha[51]=[["]] key.alpha[61]=" " key.alpha[71]="Z" key.alpha[32]="Y" key.alpha[42]="X" key.alpha[52]="W" key.alpha[62]="V" key.alpha[72]="U" key.alpha[33]="T" key.alpha[43]="S" key.alpha[53]="R" key.alpha[63]="Q" key.alpha[73]="P" key.alpha[54]="O" key.alpha[64]="N" key.alpha[74]="M" key.alpha[25]="L" key.alpha[35]="K" key.alpha[45]="J" key.alpha[55]="I" key.alpha[65]="H" key.alpha[75]="G" key.alpha[26]="F" key.alpha[36]="E" key.alpha[46]="D" key.alpha[56]="C" key.alpha[66]="B" key.alpha[76]="A"
+	key.shift[51]="pi" key.shift[61]="=" key.shift[71]="i" key.shift[32]="]" key.shift[42]="[" key.shift[62]="Mat(" key.shift[72]="List(" key.shift[33]="}" key.shift[43]="{" key.shift[45]="x^-1" key.shift[26]="atan(" key.shift[36]="acos(" key.shift[46]="asin(" key.shift[56]="e(" key.shift[66]="10^" key.shift[76]="angle(" key.shift[67]="sqrt(" 
+	
+	b2b.locate(1,1,prompt,colorfg,colorbg)
+	while zmg.keyMenuFast()~=31 do
+		
+		char = key[keyset][zmg.keyMenuFast()] or ""
+		
+		if char~="" then 
+			string = string.sub(string,1,cursor) .. char .. string.sub(string,cursor+1,#string)
+			if #string>1 then cursor=cursor+#char end
+			char=""
+			while zmg.keyMenuFast()>0 do end
+		end
+		
+		if #string>31 then string = string.sub(string,1,31) cursor=31 end
+		
+		if zmg.keyMenuFast()==44 and cursor>0 then
+			string = string.sub(string,1,cursor-1) .. string.sub(string,cursor+1,#string)
+			cursor = cursor-1
+			b2b.locate(1,2,"                               ",colorfg,colorbg)
+			elseif zmg.keyMenuFast()==27 and cursor<#string then cursor=cursor+1
+			elseif zmg.keyMenuFast()==38 and cursor>0 then cursor=cursor-1
+		end
+		
+		if zmg.keyMenuFast()==78 and keyset=="norm" then keyset="shift" while zmg.keyMenuFast()==78 do end
+			elseif zmg.keyMenuFast()==78 then keyset="norm" while zmg.keyMenuFast()==78 do end
+		end
+		
+		if zmg.keyMenuFast()==77 and keyset=="norm" then keyset="alpha" while zmg.keyMenuFast()==77 do end
+			elseif zmg.keyMenuFast()==77 then keyset="norm" while zmg.keyMenuFast()==77 do end
+		end
+		
+		if cursor<1 then cursor=1 elseif cursor>31 then cursor=31 end
+		b2b.locate(1,2,string,colorfg,colorbg)
+		if blink>0 then b2b.locate(cursor,2,cursorstyle[keyset],colorbg,colorfg) end
+		if blinktimer>1000000000000000000000 then blink=blink*-1 blinktimer=0 end
+		blinktimer=blinktimer+1
+		
+	end
 end
