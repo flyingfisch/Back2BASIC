@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Back2basic by flyingfisch</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Back2basic</h1>
+        <h2>a library for LuaZM</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/flyingfisch/Back2BASIC/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/flyingfisch/Back2BASIC/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/flyingfisch/Back2BASIC" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>Back2BASIC</h1>
+
+<hr><h2>1. What it is</h2>
+
+<p>Back2BASIC is a library that allows you to have all the functions you loved in BASIC. This will help BASIC programmers switch to lua, as well as making it more straightforward to port BASIC programs to lua.</p>
+
+<h2>2. Already implemented</h2>
+
+<ul>
+<li>b2b.menu (a prefabricated menu function)</li>
+<li>b2b.printText (like "HELLO" in BASIC, but with LESS-style page breaks)</li>
+<li>b2b.locate (like locate in BASIC)</li>
+<li>b2b.ygraph (Y= graph)</li>
+<li>b2b.inputString (get user input)</li>
+</ul><h2>3. To be implemented</h2>
+
+<h2>4. Usage</h2>
+
+<p>Make a folder called "lib" in your root directory. Put b2b.lua in this folder.
+In the program you wish to use the library, put <em>run([[lib\b2b.lua]])</em> at the top.</p>
+
+<h2>5. Function syntax</h2>
+
+<p><em><strong>NOTE: all width, height, x, and y values are not pixels, but characters.</strong></em></p>
+
+<h3>b2b.menu(x, y, width, height, title, array, colorfg (optional), colorbg (optional))</h3>
+
+<p>a menu function. returns number of selected item.</p>
+
+<ul>
+<li>x: integer</li>
+<li>y: integer</li>
+<li>width: integer</li>
+<li>height: integer. if smaller than number of items, menu will automatically scroll.</li>
+<li>title: string. title to be displayed above menu.</li>
+<li>array: array. menu options. ex. {"entry1", "entry2"}</li>
+<li>colorfg, colorbg: color. defaults to b&amp;w</li>
+</ul><h3>b2b.printText(string, colorfg (optional), colorbg (optional))</h3>
+
+<p>displays text with LESS-style page breaks</p>
+
+<ul>
+<li>string: string to be printed</li>
+<li>colorfg, colorbg: color. defaults to b&amp;w</li>
+</ul><h3>b2b.locate(x, y, string, colorfg (optional), colorbg (optional))</h3>
+
+<p>like the Locate command in BASIC.</p>
+
+<ul>
+<li>x: integer</li>
+<li>y: integer</li>
+<li>string: string to be displayed</li>
+<li>colorfg, colorbg: color. defaults to b&amp;w</li>
+</ul><h3>b2b.ygraph(f, vwin (optional), type (optional), colorfg (optional), colorbg (optional))</h3>
+
+<p>Graphs a Y= graph.</p>
+
+<ul>
+<li>f: function of x to display. ex. function (x) return math.sin(x) end</li>
+<li>vwin: array. ex. {xmin=-6, xmax=6, ymin=-3, ymax=3, step=.1}</li>
+<li>colorfg, colorbg: color. defaults to b&amp;w</li>
+</ul><h3>b2b.inputString(prompt, colorfg (optional), colorbg (optional))</h3>
+
+<p>Returns user input.</p>
+
+<ul>
+<li>prompt: string. Is displayed above the input block.</li>
+<li>colorfg, colorbg: color. defaults to b&amp;w</li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
