@@ -184,4 +184,5 @@ b2b.inputString = function (prompt, colorfg, colorbg)
 		blinktimer=blinktimer+1
 		
 	end
+	return string
 end
