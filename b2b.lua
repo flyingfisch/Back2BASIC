@@ -3,6 +3,8 @@ b2b.version="indev-version not released"
 SCREEN_WIDTH = 384
 SCREEN_HEIGHT = 216
 
+b2b.getkey = zmg.keyMenuFast
+
 b2b.menu = function (x, y, width, height, title, array, color1, color2)
 	color1 = color1 or zmg.makeColor("black")
 	color2 = color2 or zmg.makeColor("white")
@@ -185,4 +187,9 @@ b2b.inputString = function (prompt, colorfg, colorbg)
 		
 	end
 	return string
+end
+
+b2b.fline = function (x1, y1, x2, y2, color)
+	color = color or zmg.makeColor("black")
+	zmg.drawLine(x1, y1, x2, y2, color)
 end
