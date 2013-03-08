@@ -46,6 +46,6 @@ Graphs a Y= graph.
 - colorfg, colorbg: color. defaults to b&w
 
 b2b.inputString(prompt, colorfg (optional), colorbg (optional))
-Gets user input.
+Returns user input.
 - prompt: string. Is displayed above the input block.
 - colorfg, colorbg: color. defaults to b&w
