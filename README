@@ -5,7 +5,7 @@ Back2BASIC is a library that allows you to have all the functions you loved in B
 - b2b.menu (a prefabricated menu function)
 - b2b.printText (like "HELLO" in BASIC, but with LESS-style page breaks)
 - b2b.locate (like locate in BASIC)
-- b2b.ygraph (Y= graph)
+- b2b.ygraph (Y= graph) 
 - b2b.inputString (get user input)
 
 3. To be implemented
@@ -16,6 +16,10 @@ In the program you wish to use the library, put run([[lib\b2b.lua]]) at the top.
 
 5. Function syntax
 NOTE: all width, height, x, and y values are not pixels, but characters.
+
+b2b.autoFastCopy(option)
+Set whether b2b commands should auto refresh the screen on completion.
+- option: 1 or 0. 1 means it will automatically refresh the display, 0 means its will not.
 
 b2b.menu(x, y, width, height, title, array, colorfg (optional), colorbg (optional))
 a menu function. returns number of selected item.

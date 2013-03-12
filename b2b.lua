@@ -3,6 +3,14 @@ b2b.version="indev-version not released"
 SCREEN_WIDTH = 384
 SCREEN_HEIGHT = 216
 
+b2b.autoFastCopy = function (option)
+	if option==1 then b2b.fastCopy = function() b2b.fastCopy() end
+		else b2b.fastCopy = function() end
+	end
+end
+
+b2b.autoFastCopy(1)
+
 b2b.getkey = zmg.keyMenuFast
 
 b2b.menu = function (x, y, width, height, title, array, color1, color2)
@@ -59,7 +67,7 @@ b2b.menu = function (x, y, width, height, title, array, color1, color2)
 		
 		
 		--refresh screen
-		zmg.fastCopy()
+		b2b.fastCopy()
 		--keyMenu
 		if continue~=1 then key=zmg.keyMenu() end
 	end
@@ -90,7 +98,7 @@ b2b.printText = function (string, colorfg, colorbg)
 		end
 		zmg.drawText(1, 198, "Press a key (Page " .. j .. "/" .. math.floor(#substring/11)+1 .. ")", colorbg, colorfg)
 		--refresh
-		zmg.fastCopy()
+		b2b.fastCopy()
 		--wait
 		zmg.keyMenu()
 	end
@@ -102,7 +110,7 @@ b2b.locate = function (x, y, string, colorfg, colorbg)
 	colorfg = colorfg or zmg.makeColor("black")
 	colorbg = colorbg or zmg.makeColor("white")
 	zmg.drawText(x, y, string, colorfg, colorbg)
-	zmg.fastCopy()
+	b2b.fastCopy()
 end
 
 b2b.ygraph = function (f, vwin, type, colorfg, colorbg)
@@ -131,7 +139,7 @@ b2b.ygraph = function (f, vwin, type, colorfg, colorbg)
 		end
 	end
     
-	zmg.fastCopy()
+	b2b.fastCopy()
 end
 
 b2b.inputString = function (prompt, colorfg, colorbg, blinkspeed)
@@ -183,7 +191,7 @@ b2b.inputString = function (prompt, colorfg, colorbg, blinkspeed)
 		if cursor<1 then cursor=1 elseif cursor>31 then cursor=31 end
 		zmg.drawText(1*12-12,2*18-18,string,colorfg,colorbg)
 		if blink>0 then b2b.locate(cursor,2,cursorstyle[keyset],colorbg,colorfg)
-			else zmg.fastCopy()
+			else b2b.fastCopy()
 		end
 		if zmg.ticks()-blinktimer>blinkspeed then blink=blink*-1 blinktimer=zmg.ticks() end
 		
