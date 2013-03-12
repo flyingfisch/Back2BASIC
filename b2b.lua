@@ -134,11 +134,12 @@ b2b.ygraph = function (f, vwin, type, colorfg, colorbg)
 	zmg.fastCopy()
 end
 
-b2b.inputString = function (prompt, colorfg, colorbg)
+b2b.inputString = function (prompt, colorfg, colorbg, blinkspeed)
 	colorfg = colorfg or zmg.makeColor("black")
 	colorbg = colorbg or zmg.makeColor("white")
+	local blinkspeed=blinkspeed or 60
 	local blink=1
-	local blinktimer=1
+	local blinktimer=zmg.ticks()
 	local cursor=1
 	local cursorstyle={norm=" ",alpha="A",shift="s"}
 	local char=""
@@ -150,6 +151,7 @@ b2b.inputString = function (prompt, colorfg, colorbg)
 	key.shift[51]="pi" key.shift[61]="=" key.shift[71]="i" key.shift[32]="]" key.shift[42]="[" key.shift[62]="Mat(" key.shift[72]="List(" key.shift[33]="}" key.shift[43]="{" key.shift[45]="x^-1" key.shift[26]="atan(" key.shift[36]="acos(" key.shift[46]="asin(" key.shift[56]="e(" key.shift[66]="10^" key.shift[76]="angle(" key.shift[67]="sqrt(" 
 	
 	b2b.locate(1,1,prompt,colorfg,colorbg)
+
 	while zmg.keyMenuFast()~=31 do
 		
 		char = key[keyset][zmg.keyMenuFast()] or ""
@@ -162,7 +164,6 @@ b2b.inputString = function (prompt, colorfg, colorbg)
 		end
 		
 		if #string>31 then string = string.sub(string,1,31) cursor=31 end
-		
 		if zmg.keyMenuFast()==44 and cursor>0 then
 			string = string.sub(string,1,cursor-1) .. string.sub(string,cursor+1,#string)
 			cursor = cursor-1
@@ -170,7 +171,7 @@ b2b.inputString = function (prompt, colorfg, colorbg)
 			elseif zmg.keyMenuFast()==27 and cursor<#string then cursor=cursor+1
 			elseif zmg.keyMenuFast()==38 and cursor>0 then cursor=cursor-1
 		end
-		
+
 		if zmg.keyMenuFast()==78 and keyset=="norm" then keyset="shift" while zmg.keyMenuFast()==78 do end
 			elseif zmg.keyMenuFast()==78 then keyset="norm" while zmg.keyMenuFast()==78 do end
 		end
@@ -180,10 +181,11 @@ b2b.inputString = function (prompt, colorfg, colorbg)
 		end
 		
 		if cursor<1 then cursor=1 elseif cursor>31 then cursor=31 end
-		b2b.locate(1,2,string,colorfg,colorbg)
-		if blink>0 then b2b.locate(cursor,2,cursorstyle[keyset],colorbg,colorfg) end
-		if blinktimer>1000000000000000000000 then blink=blink*-1 blinktimer=0 end
-		blinktimer=blinktimer+1
+		zmg.drawText(1*12-12,2*18-18,string,colorfg,colorbg)
+		if blink>0 then b2b.locate(cursor,2,cursorstyle[keyset],colorbg,colorfg)
+			else zmg.fastCopy()
+		end
+		if zmg.ticks()-blinktimer>blinkspeed then blink=blink*-1 blinktimer=zmg.ticks() end
 		
 	end
 	return string

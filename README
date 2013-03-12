@@ -45,10 +45,11 @@ Graphs a Y= graph.
 - vwin: array. ex. {xmin=-6, xmax=6, ymin=-3, ymax=3, step=.1}
 - colorfg, colorbg: color. defaults to b&w
 
-b2b.inputString(prompt, colorfg (optional), colorbg (optional))
+b2b.inputString(prompt, colorfg (optional), colorbg (optional), blinkspeed (optional))
 Returns user input.
 - prompt: string. Is displayed above the input block.
 - colorfg, colorbg: color. defaults to b&w
+- blinkspeed: integer. speed cursor should blink at. defaults to 60.
 
 b2b.fline(x1, y1, x2, y2, color (optional))
 - x1 y1 x2 y2: integer. measurement in pixels.
